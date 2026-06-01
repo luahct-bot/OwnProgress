@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>新达科技 · 售前顾问工作职责进度跟踪表（支持Excel上传）</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: #eef2f7;
+            margin: 0;
+            padding: 20px;
+            color: #1e2f3e;
+        }
+        .container {
+            max-width: 1500px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 32px;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+            padding: 24px 24px 32px 24px;
+            position: relative;
+        }
+        h1 {
+            font-size: 1.8rem;
+            margin: 0 0 6px 0;
+            color: #0b3954;
+        }
+        .role-purpose {
+            background: linear-gradient(135deg, #eef4fa 0%, #e2edf5 100%);
+            border-left: 6px solid #2c7da0;
+            border-radius: 20px;
+            padding: 16px 20px;
+            margin-bottom: 25px;
+            font-size: 0.95rem;
+            color: #1f5068;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .role-purpose strong {
+            color: #0b5e7e;
+            font-size: 1rem;
+        }
+        .sub {
+            color: #4a6f7e;
+            border-bottom: 1px solid #dce5ec;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .sub-left {
+            display: flex;
+            align-items: baseline;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .version-badge {
+            background: #e9ecef;
+            padding: 4px 12px;
+            border-radius: 40px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: #2c7da0;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+        }
+        .btn-group {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .btn {
+            background-color: #1e6f3f;
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: 0.2s;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .btn-secondary {
+            background-color: #2c7da0;
+        }
+        .btn-warning {
+            background-color: #d97744;
+        }
+        .btn:hover {
+            filter: brightness(1.05);
+            transform: scale(1.02);
+        }
+        .upload-area {
+            background: #f8fafc;
+            border-radius: 28px;
+            padding: 12px 18px;
+            margin-bottom: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 15px;
+            border: 1px dashed #bdd3e0;
+        }
+        .file-label {
+            background-color: #eef2f5;
+            padding: 6px 16px;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            font-weight: 500;
+        }
+        input[type="file"] {
+            display: none;
+        }
+        .data-source {
+            background: #eef4fa;
+            border-radius: 20px;
+            padding: 10px 18px;
+            margin-bottom: 20px;
+            font-size: 0.8rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .source-badge {
+            font-weight: 600;
+            background: #d9e6f2;
+            padding: 4px 12px;
+            border-radius: 24px;
+        }
+        .flow-container {
+            display: flex;
+            flex-direction: column;
+            gap: 28px;
+        }
+        .flow-card {
+            background: #f9fbfd;
+            border-radius: 28px;
+            border: 1px solid #e2edf2;
+            overflow-x: auto;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+        }
+        .card-header {
+            background: #2c7da0;
+            color: white;
+            padding: 14px 20px;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+        .task-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 700px;
+        }
+        .task-table th {
+            background: #eaf3f8;
+            text-align: left;
+            padding: 12px 16px;
+            font-weight: 600;
+            color: #1f5068;
+            border-bottom: 1px solid #cbdde6;
+            font-size: 0.85rem;
+        }
+        .task-table td {
+            padding: 12px 16px;
+            border-bottom: 1px solid #e9f0f3;
+            vertical-align: middle;
+            font-size: 0.85rem;
+        }
+        .task-desc {
+            font-weight: 500;
+        }
+        .date-input, .days-input {
+            padding: 6px 8px;
+            border: 1px solid #cbd5e1;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            background: white;
+            width: 130px;
+        }
+        .days-input {
+            width: 80px;
+            text-align: center;
+        }
+        .end-date-display {
+            background: #f0f4f9;
+            padding: 6px 10px;
+            border-radius: 20px;
+            display: inline-block;
+            font-size: 0.8rem;
+            color: #1f5068;
+        }
+        .status-select {
+            padding: 6px 8px;
+            border-radius: 20px;
+            border: 1px solid #cbd5e1;
+            background: white;
+            font-size: 0.8rem;
+            cursor: pointer;
+        }
+        .footer-note {
+            margin-top: 30px;
+            background: #f0f6fa;
+            border-radius: 24px;
+            padding: 16px 22px;
+            font-size: 0.8rem;
+            color: #2c5a6e;
+        }
+        .save-bar {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 20px;
+            gap: 12px;
+        }
+        @media (max-width: 780px) {
+            .task-table th, .task-table td { padding: 8px 10px; }
+            .date-input { width: 110px; }
+            .days-input { width: 70px; }
+        }
+    </style>
+    <script src="https://cdn.sheetjs.com/xlsx-0.20.2/package/dist/xlsx.full.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <div class="sub">
+        <div class="sub-left">
+            <span>🗂️ 基于《工作职掌--赖琮达.docx》 | 七大职责细项 · 自动计算完成日期</span>
+            <span class="version-badge">CT v1.02 (支持Excel上传)</span>
+        </div>
+        <div class="btn-group">
+            <button class="btn" id="saveProgressBtn">💾 保存进度 (浏览器)</button>
+            <button class="btn btn-secondary" id="exportExcelBtn">📎 导出含进度 Excel</button>
+            <button class="btn btn-warning" id="resetProgressBtn">↺ 重置所有进度</button>
+        </div>
+    </div>
+
+    <!-- 职位定位 -->
+    <div class="role-purpose">
+        <strong>🎯 职位定位（Role Purpose）</strong><br>
+        售前顾问是「技术 × 业务 × 解决方案」的桥梁，负责将客户需求转化为可落地的数字解决方案，协助业务提升成交率，并确保方案具备可交付性与商业价值。
+    </div>
+
+    <div class="data-source">
+        <span>📁 <strong>数据来源</strong> : 工作职掌--赖琮达.docx (公司提供)</span>
+        <span>📅 <strong>上次更新</strong> : <span id="lastSaved">未保存</span></span>
+        <span class="source-badge" style="background:#d9e6f2; padding:4px 12px; border-radius:24px;">✅ 可上传Excel批量更新任务进度</span>
+    </div>
+
+    <!-- 上传区域 -->
+    <div class="upload-area">
+        <span>📂 上传 Excel 更新任务进度：</span>
+        <label class="file-label" for="excelUpload">选择档案 (.xlsx, .xls)</label>
+        <input type="file" id="excelUpload" accept=".xlsx, .xls, .csv">
+        <span style="font-size:0.75rem; color:#6c8b9b;">※ 根据「子任务 / 细项」匹配，更新开始日期、工作天数、状态</span>
+        <button class="btn btn-warning" id="resetDefaultBtn" style="margin-left:auto;">↺ 重置所有进度</button>
+    </div>
+
+    <div class="save-bar">
+        <span style="font-size:0.75rem; color:#6c8b9b;">💡 点击「保存进度」会保存在此浏览器；「导出Excel」可导出报表；上传Excel会批量更新现有任务</span>
+    </div>
+
+    <div class="flow-container" id="flowContainer">
+        <!-- 动态生成七大步骤卡片及子任务表格 -->
+    </div>
+
+    <div class="footer-note">
+        <strong>📌 使用说明：</strong><br>
+        ▪ 每个子任务可设置「开始日期」（点击日期选择器直接选择）和「工作天数」（正整数）。<br>
+        ▪ 「完成日期」会根据开始日期 + 工作天数 - 1 自动计算并显示。<br>
+        ▪ 状态分为：待处理 / 进行中 / 已完成，可随时调整。<br>
+        ▪ 点击「保存进度」将所有数据保存在浏览器本地；「导出Excel」可导出含所有日期、天数的报表。<br>
+        ▪ 「上传Excel」可根据「子任务/细项」名称匹配，批量更新开始日期、工作天数、状态。<br>
+        ▪ 重置会清空所有开始日期、工作天数、状态为默认值。
+    </div>
+</div>
+
+<script>
+    // 工作职责结构 (步骤名称, 子任务数组) — 简体中文 + 数字编号
+    const jobStructure = [
+        {
+            stepName: "1. 客户需求分析与顾问服务",
+            tasks: [
+                "参与业务开发，客户访谈与需求盘点",
+                "分析客户现行流程 (AS-IS) 并提出优化建议",
+                "撰写需求文件",
+                "提供解决方案建议"
+            ]
+        },
+        {
+            stepName: "2. 解决方案设计",
+            tasks: [
+                "设计整体解决方案架构",
+                "整合公司产品 / 规划系统整合",
+                "评估技术可行性与风险"
+            ]
+        },
+        {
+            stepName: "3. 售前提案与简报",
+            tasks: [
+                "撰写提案文件 (Proposal / RFP 回应)",
+                "制作简报与Demo展示",
+                "进行客户简报与技术说明",
+                "回应客户技术问题 (Q&A)",
+                "目标：提高成交率与客户信任"
+            ]
+        },
+        {
+            stepName: "4. 商机推进与成交支持",
+            tasks: [
+                "与业务共同制定销售策略",
+                "参与关键商务谈判 (技术层面)",
+                "协助客户内部决策 (如PoC、试点)"
+            ]
+        },
+        {
+            stepName: "5. 专案交接与技术衔接",
+            tasks: [
+                "已成交专案完整交接给PM与开发团队",
+                "说明系统架构、需求与关键成功因素",
+                "协助专案初期技术厘清",
+                "面对客户端专案PM (英文)"
+            ]
+        },
+        {
+            stepName: "6. 市场解决方案发展",
+            tasks: [
+                "研究新加坡及东南亚市场需求",
+                "发展产业解决方案 (FinTech / 智慧制造)",
+                "建立标准化方案包 (Solution Package)",
+                "推动从「客制案」走向「产品化」"
+            ]
+        },
+        {
+            stepName: "7. 内部知识与流程优化",
+            tasks: [
+                "建立 Solution Template / Proposal Template",
+                "整理成功案例与最佳实践 (Best Practice)",
+                "优化售前流程 (提高效率与品质)"
+            ]
+        }
+    ];
+
+    function getTaskKey(stepIdx, taskIdx) {
+        return `step_${stepIdx}_task_${taskIdx}`;
+    }
+
+    function loadProgressFromStorage() {
+        const stored = localStorage.getItem("presales_progress_v4");
+        if (stored) {
+            try {
+                return JSON.parse(stored);
+            } catch(e) { console.warn(e); }
+        }
+        return {};
+    }
+
+    let progressMap = loadProgressFromStorage();
+
+    function updateLastSavedTime() {
+        const last = localStorage.getItem("presales_progress_last_saved_v4");
+        if (last) {
+            document.getElementById("lastSaved").innerText = new Date(last).toLocaleString();
+        } else {
+            document.getElementById("lastSaved").innerText = "未保存";
+        }
+    }
+
+    function saveProgressToStorage() {
+        localStorage.setItem("presales_progress_v4", JSON.stringify(progressMap));
+        localStorage.setItem("presales_progress_last_saved_v4", new Date().toISOString());
+        updateLastSavedTime();
+        alert("进度已保存至浏览器！");
+    }
+
+    function resetAllProgress() {
+        if (confirm("确定要重置所有任务的开始日期、工作天数及状态为默认值吗？此操作无法复原。")) {
+            progressMap = {};
+            renderAllCards();
+            saveProgressToStorage();
+        }
+    }
+
+    function computeEndDate(startDateStr, workingDays) {
+        if (!startDateStr || !workingDays || workingDays <= 0) return "";
+        const date = new Date(startDateStr);
+        if (isNaN(date.getTime())) return "";
+        date.setDate(date.getDate() + (workingDays - 1));
+        const y = date.getFullYear();
+        const m = String(date.getMonth() + 1).padStart(2, '0');
+        const d = String(date.getDate()).padStart(2, '0');
+        return `${y}-${m}-${d}`;
+    }
+
+    function renderAllCards() {
+        const container = document.getElementById("flowContainer");
+        if (!container) return;
+        let html = "";
+        for (let sIdx = 0; sIdx < jobStructure.length; sIdx++) {
+            const step = jobStructure[sIdx];
+            html += `<div class="flow-card">
+                        <div class="card-header">${step.stepName}</div>
+                        <table class="task-table">
+                            <thead>
+                                <tr>
+                                    <th style="width:35%">子任务 / 细项</th>
+                                    <th style="width:20%">开始日期 (点击选择)</th>
+                                    <th style="width:15%">工作天数</th>
+                                    <th style="width:20%">完成日期 (自动)</th>
+                                    <th style="width:15%">状态</th>
+                                </tr>
+                            </thead>
+                            <tbody>`;
+            for (let tIdx = 0; tIdx < step.tasks.length; tIdx++) {
+                const taskDesc = step.tasks[tIdx];
+                const key = getTaskKey(sIdx, tIdx);
+                const prog = progressMap[key] || { startDate: "", workingDays: 1, status: "pending" };
+                const startDateVal = prog.startDate || "";
+                const workingDaysVal = prog.workingDays !== undefined ? prog.workingDays : 1;
+                const endDateVal = computeEndDate(startDateVal, workingDaysVal);
+                const statusVal = prog.status || "pending";
+
+                const statusOptions = `
+                    <option value="pending" ${statusVal === "pending" ? "selected" : ""}>⏳ 待处理</option>
+                    <option value="in_progress" ${statusVal === "in_progress" ? "selected" : ""}>🔄 进行中</option>
+                    <option value="complete" ${statusVal === "complete" ? "selected" : ""}>✅ 已完成</option>
+                `;
+                html += `<tr data-key="${key}">
+                            <td class="task-desc">${escapeHtml(taskDesc)}</td>
+                            <td><input type="date" class="date-input" data-field="startDate" value="${escapeHtml(startDateVal)}"></td>
+                            <td><input type="number" class="days-input" data-field="workingDays" value="${workingDaysVal}" min="1" step="1"></td>
+                            <td><span class="end-date-display" data-field="endDateDisplay">${endDateVal || "—"}</span></td>
+                            <td><select class="status-select" data-field="status">${statusOptions}</select></td>
+                          </tr>`;
+            }
+            html += `</tbody>
+                        </table>
+                    </div>`;
+        }
+        container.innerHTML = html;
+
+        // 绑定事件
+        const allRows = document.querySelectorAll("#flowContainer tr[data-key]");
+        allRows.forEach(row => {
+            const key = row.getAttribute("data-key");
+            const startDateInput = row.querySelector(".date-input");
+            const daysInput = row.querySelector(".days-input");
+            const statusSelect = row.querySelector(".status-select");
+            const endDateSpan = row.querySelector(".end-date-display");
+
+            function updateTaskProgress() {
+                if (!progressMap[key]) progressMap[key] = { startDate: "", workingDays: 1, status: "pending" };
+                const newStartDate = startDateInput ? startDateInput.value : "";
+                const newWorkingDays = daysInput ? parseInt(daysInput.value, 10) : 1;
+                const newStatus = statusSelect ? statusSelect.value : "pending";
+                progressMap[key].startDate = newStartDate;
+                progressMap[key].workingDays = isNaN(newWorkingDays) ? 1 : newWorkingDays;
+                progressMap[key].status = newStatus;
+                if (endDateSpan) {
+                    const computedEnd = computeEndDate(newStartDate, progressMap[key].workingDays);
+                    endDateSpan.innerText = computedEnd || "—";
+                }
+            }
+
+            if (startDateInput) startDateInput.addEventListener("change", updateTaskProgress);
+            if (daysInput) daysInput.addEventListener("input", updateTaskProgress);
+            if (statusSelect) statusSelect.addEventListener("change", updateTaskProgress);
+            updateTaskProgress();
+        });
+    }
+
+    function escapeHtml(str) {
+        if (!str) return "";
+        return str.replace(/[&<>]/g, function(m) {
+            if (m === '&') return '&amp;';
+            if (m === '<') return '&lt;';
+            if (m === '>') return '&gt;';
+            return m;
+        });
+    }
+
+    // 导出Excel（包含当前所有任务进度）
+    function exportWithProgress() {
+        // 同步最新数据
+        const allRows = document.querySelectorAll("#flowContainer tr[data-key]");
+        allRows.forEach(row => {
+            const key = row.getAttribute("data-key");
+            const startDateInput = row.querySelector(".date-input");
+            const daysInput = row.querySelector(".days-input");
+            const statusSelect = row.querySelector(".status-select");
+            if (startDateInput && daysInput && statusSelect) {
+                if (!progressMap[key]) progressMap[key] = { startDate: "", workingDays: 1, status: "pending" };
+                progressMap[key].startDate = startDateInput.value;
+                progressMap[key].workingDays = parseInt(daysInput.value, 10) || 1;
+                progressMap[key].status = statusSelect.value;
+            }
+        });
+
+        const excelRows = [["步骤", "子任务", "开始日期", "工作天数", "完成日期", "状态代码", "状态文字"]];
+        for (let sIdx = 0; sIdx < jobStructure.length; sIdx++) {
+            const stepName = jobStructure[sIdx].stepName;
+            const tasks = jobStructure[sIdx].tasks;
+            for (let tIdx = 0; tIdx < tasks.length; tIdx++) {
+                const key = getTaskKey(sIdx, tIdx);
+                const prog = progressMap[key] || { startDate: "", workingDays: 1, status: "pending" };
+                const startDate = prog.startDate || "";
+                const workingDays = prog.workingDays;
+                const endDate = computeEndDate(startDate, workingDays);
+                let statusText = "";
+                if (prog.status === "pending") statusText = "待处理";
+                else if (prog.status === "in_progress") statusText = "进行中";
+                else if (prog.status === "complete") statusText = "已完成";
+                excelRows.push([
+                    stepName,
+                    tasks[tIdx],
+                    startDate,
+                    workingDays,
+                    endDate,
+                    prog.status,
+                    statusText
+                ]);
+            }
+        }
+        // 添加日常活动作为示例行
+        excelRows.push(["日常活动", "与业务开会讨论商机", "", "", "", "", ""]);
+        excelRows.push(["日常活动", "参与客户会议(线上/实体)", "", "", "", "", ""]);
+        excelRows.push(["日常活动", "撰写提案与简报(英文)", "", "", "", "", ""]);
+        excelRows.push(["日常活动", "设计系统架构图", "", "", "", "", ""]);
+        excelRows.push(["日常活动", "与技术团队讨论可行性", "", "", "", "", ""]);
+        excelRows.push(["日常活动", "准备Demo或PoC", "", "", "", "", ""]);
+        excelRows.push(["日常活动", "客户沟通窗口", "", "", "", "", ""]);
+
+        const ws = XLSX.utils.aoa_to_sheet(excelRows);
+        ws['!cols'] = [{wch:28}, {wch:48}, {wch:14}, {wch:10}, {wch:14}, {wch:12}, {wch:12}];
+        const wb = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, "工作职责进度跟踪");
+        XLSX.writeFile(wb, `Shinda_Presales_Progress_${new Date().toISOString().slice(0,19).replace(/:/g, '-')}.xlsx`);
+        alert("导出成功，已包含开始日期、工作天数、完成日期及状态！");
+    }
+
+    // 上传Excel：根据「子任务/细项」匹配更新开始日期、工作天数、状态
+    function uploadAndUpdate(file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const data = new Uint8Array(e.target.result);
+            const workbook = XLSX.read(data, { type: 'array' });
+            const sheet = workbook.Sheets[workbook.SheetNames[0]];
+            const rows = XLSX.utils.sheet_to_json(sheet, { header: 1, defval: "" });
+            if (!rows || rows.length < 2) {
+                alert("Excel至少需要标题行+数据行");
+                return;
+            }
+            const headers = rows[0];
+            let taskNameIdx = -1, startDateIdx = -1, workingDaysIdx = -1, statusIdx = -1;
+            // 智能匹配列名（支持多种常见写法）
+            headers.forEach((h, i) => {
+                const str = String(h || "").trim();
+                if (str.includes("子任务") || str.includes("细项") || str === "任务名称" || str === "子任务 / 细项") taskNameIdx = i;
+                if (str.includes("开始日期") || str === "开始日期") startDateIdx = i;
+                if (str.includes("工作天数") || str === "工作天数") workingDaysIdx = i;
+                if (str.includes("状态") && !str.includes("状态代码")) statusIdx = i;
+            });
+            if (taskNameIdx === -1) {
+                alert("Excel必须包含「子任务 / 细项」或「任务名称」列");
+                return;
+            }
+            // 构建映射：任务名称 -> { startDate, workingDays, status }
+            const excelMap = {};
+            for (let i = 1; i < rows.length; i++) {
+                const row = rows[i];
+                if (!row || row.length === 0) continue;
+                let taskName = row[taskNameIdx] ? String(row[taskNameIdx]).trim() : "";
+                if (!taskName) continue;
+                let startDate = (startDateIdx !== -1 && row[startDateIdx]) ? String(row[startDateIdx]).trim() : "";
+                let workingDays = (workingDaysIdx !== -1 && row[workingDaysIdx]) ? parseInt(row[workingDaysIdx], 10) : null;
+                if (workingDays !== null && isNaN(workingDays)) workingDays = null;
+                let statusRaw = (statusIdx !== -1 && row[statusIdx]) ? String(row[statusIdx]).trim() : "";
+                let status = "pending";
+                if (statusRaw.includes("进行中") || statusRaw.includes("in_progress")) status = "in_progress";
+                else if (statusRaw.includes("已完成") || statusRaw.includes("complete")) status = "complete";
+                else if (statusRaw.includes("待处理") || statusRaw.includes("pending")) status = "pending";
+                excelMap[taskName] = { startDate, workingDays, status };
+            }
+            // 遍历当前所有任务进行匹配更新
+            let updatedCount = 0;
+            for (let sIdx = 0; sIdx < jobStructure.length; sIdx++) {
+                const tasks = jobStructure[sIdx].tasks;
+                for (let tIdx = 0; tIdx < tasks.length; tIdx++) {
+                    const taskName = tasks[tIdx];
+                    const key = getTaskKey(sIdx, tIdx);
+                    const excelData = excelMap[taskName];
+                    if (excelData) {
+                        if (!progressMap[key]) progressMap[key] = { startDate: "", workingDays: 1, status: "pending" };
+                        if (excelData.startDate !== undefined && excelData.startDate !== "") progressMap[key].startDate = excelData.startDate;
+                        if (excelData.workingDays !== null && !isNaN(excelData.workingDays)) progressMap[key].workingDays = excelData.workingDays;
+                        if (excelData.status) progressMap[key].status = excelData.status;
+                        updatedCount++;
+                    }
+                }
+            }
+            if (updatedCount === 0) {
+                alert("未找到匹配的任务名称，请确保Excel中的「子任务/细项」与当前页面中的名称完全一致（包括标点符号）。");
+                return;
+            }
+            // 重新渲染表格
+            renderAllCards();
+            // 更新显示来源信息
+            document.getElementById("sourceFileName").innerText = file.name;
+            document.getElementById("lastSaved").innerText = "已导入新进度 (未保存)";
+            alert(`成功更新 ${updatedCount} 个任务的进度数据！请点击「保存进度」以永久保存。`);
+        };
+        reader.readAsArrayBuffer(file);
+    }
+
+    // 重置所有进度（清空）
+    function resetAllProgress() {
+        if (confirm("确定要重置所有任务的开始日期、工作天数及状态为默认值吗？此操作无法复原。")) {
+            progressMap = {};
+            renderAllCards();
+            saveProgressToStorage();
+        }
+    }
+
+    function init() {
+        renderAllCards();
+        updateLastSavedTime();
+        document.getElementById("saveProgressBtn").addEventListener("click", () => {
+            // 同步最新输入
+            const allRows = document.querySelectorAll("#flowContainer tr[data-key]");
+            allRows.forEach(row => {
+                const key = row.getAttribute("data-key");
+                const startDateInput = row.querySelector(".date-input");
+                const daysInput = row.querySelector(".days-input");
+                const statusSelect = row.querySelector(".status-select");
+                if (startDateInput && daysInput && statusSelect) {
+                    if (!progressMap[key]) progressMap[key] = { startDate: "", workingDays: 1, status: "pending" };
+                    progressMap[key].startDate = startDateInput.value;
+                    progressMap[key].workingDays = parseInt(daysInput.value, 10) || 1;
+                    progressMap[key].status = statusSelect.value;
+                }
+            });
+            saveProgressToStorage();
+        });
+        document.getElementById("exportExcelBtn").addEventListener("click", exportWithProgress);
+        document.getElementById("resetProgressBtn").addEventListener("click", resetAllProgress);
+        document.getElementById("resetDefaultBtn").addEventListener("click", resetAllProgress);
+        const fileInput = document.getElementById("excelUpload");
+        fileInput.addEventListener("change", (e) => {
+            if (e.target.files.length) {
+                uploadAndUpdate(e.target.files[0]);
+                fileInput.value = '';
+            }
+        });
+    }
+
+    init();
+</script>
+</body>
+</html>
